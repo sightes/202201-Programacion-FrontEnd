@@ -1,0 +1,29 @@
+app.post('/view', function(req,res){
+  db.serialize(()=>{
+    db.each('SELECT id ID, name NAME FROM emp WHERE id =?', [req.body.id], function(err,row){     //db.each() is only one which is funtioning while reading data from the DB
+      if(err){
+        res.send("Error encountered while displaying");
+        return console.error(err.message);
+      }
+      res.send(` ID: ${row.ID},    Name: ${row.NAME}`);
+      console.log("Entry displayed successfully");
+    });
+  });
+});
+
+
+
+
+// READ
+app.get('/view/:id', function(req,res){
+  db.serialize(()=>{
+    db.each('SELECT id ID, name NAME FROM emp WHERE id =?', [req.params.id], function(err,row){     //db.each() is only one which is funtioning while reading data from the DB
+      if(err){
+        res.send("Error encountered while dislaying");
+        return console.error(err.message);
+      }
+      res.send(` ID: ${row.ID},    Name: ${row.NAME}`);
+      console.log("Entry dislayed successfully");
+    });
+  });
+});
