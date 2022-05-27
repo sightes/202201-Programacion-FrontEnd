@@ -5,7 +5,9 @@
     "express-rate-limit": "^6.4.0",
     "helmet": "^5.1.0",
     "http": "^0.0.1-security",
+    "node-fetch": "^3.2.4",
     "path": "^0.12.7",
-    "sqlite3": "^5.0.8"
+    "sqlite3": "^5.0.8",
+    "xhr2": "^0.2.1"
   }
 }

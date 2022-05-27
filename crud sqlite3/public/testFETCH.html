@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html>
+  
+<head>
+
+      
+    <!-- Script to get JSON file and display its content -->
+    <script type="text/javascript" language="javascript">
+        
+fetch('http://127.0.0.1:3000/view.json')
+.then(response=>response.json())
+.then(data=>document.getElementById('display').innerHTML=data[0].mensaje)
+
+    </script>
+</head>
+  
+<body>
+      
+
+    <div id="display" style="background-color:#39B54A;"></div>
+    </body>
+  
+</html>

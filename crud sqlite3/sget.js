@@ -6,6 +6,8 @@ var path = require("path");
 var bodyParser = require('body-parser');
 var helmet = require('helmet');
 var rateLimit = require("express-rate-limit");
+const { response } = require('express');
+const { json } = require('express/lib/response');
 var app = express();
 var server = http.createServer(app);
 var db = new sqlite3.Database('./data.db');
@@ -29,6 +31,37 @@ app.get('/add', function(req,res){
   });
 
 });
+
+
+
+app.get('/view.json', function(req,res){
+  db.serialize(()=>{
+    db.all('SELECT * FROM emp ', [], function(err,row){     //db.each() is only one which is funtioning while reading data from the DB
+
+      if(err){
+        res.send("Error encountered while displaying");
+        return console.error(err.message);
+      }
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Methods', 'GET');
+      //res.json({ message: 'Hello World' });
+      //return res.send(JSON.stringify(row));
+     //return  res.json(JSON.stringify(row));
+      res.send(row);
+    });
+    
+  });
+});
+
+
+
+// http://example.com
+app.get('/test.json', function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET');
+  res.send({ message: 'Hello World' });
+});
+
 
 // Closing the database connection.
 app.get('/close', function(req,res){
