@@ -45,6 +45,13 @@ app.get('/view.json',function(req,res){
 });
 
 
+app.get('/fecha',function(req,res){
+
+      res.send(Date());
+  
+});
+
+
 app.get('/delete',function(req,res){
   db.serialize(()=>{
     db.all('delete from tareas where id=?', [req.query.id], function(err,row) {
